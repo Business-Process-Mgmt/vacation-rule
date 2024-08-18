@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1hhie8t" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.16.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
+  <bpmn:process id="vacation-rule-process" name="Vacation Rule Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0fxldbp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_1hc8ejf">
+      <bpmn:incoming>Flow_01o8o3c</bpmn:incoming>
+      <bpmn:outgoing>Flow_10mrab1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ulg3m6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_01o8o3c" sourceRef="Activity_0d5wufm" targetRef="Gateway_1hc8ejf" />
+    <bpmn:sequenceFlow id="Flow_10mrab1" sourceRef="Gateway_1hc8ejf" targetRef="Activity_0yggq3u">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Yes</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_15ztf3k">
+      <bpmn:incoming>Flow_10wezqj</bpmn:incoming>
+      <bpmn:incoming>Flow_0ulg3m6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_10wezqj" sourceRef="Activity_0yggq3u" targetRef="Event_15ztf3k" />
+    <bpmn:sequenceFlow id="Flow_0ulg3m6" sourceRef="Gateway_1hc8ejf" targetRef="Event_15ztf3k">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=No</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_0d5wufm" name="Find Out Of Office Configuration">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="out-of-office-config" retries="1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0fxldbp</bpmn:incoming>
+      <bpmn:outgoing>Flow_01o8o3c</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0yggq3u" name="Call Job worker to find all the task for that assignee and reassign">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="reassign-tasks" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_10mrab1</bpmn:incoming>
+      <bpmn:outgoing>Flow_10wezqj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0fxldbp" sourceRef="StartEvent_1" targetRef="Activity_0d5wufm" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="vacation-rule-process">
+      <bpmndi:BPMNShape id="Gateway_1hc8ejf_di" bpmnElement="Gateway_1hc8ejf" isMarkerVisible="true">
+        <dc:Bounds x="425" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_15ztf3k_di" bpmnElement="Event_15ztf3k">
+        <dc:Bounds x="692" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u6smed_di" bpmnElement="Activity_0d5wufm">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12o8dzf_di" bpmnElement="Activity_0yggq3u">
+        <dc:Bounds x="530" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_01o8o3c_di" bpmnElement="Flow_01o8o3c">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="425" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10mrab1_di" bpmnElement="Flow_10mrab1">
+        <di:waypoint x="475" y="117" />
+        <di:waypoint x="530" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10wezqj_di" bpmnElement="Flow_10wezqj">
+        <di:waypoint x="630" y="117" />
+        <di:waypoint x="692" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ulg3m6_di" bpmnElement="Flow_0ulg3m6">
+        <di:waypoint x="450" y="142" />
+        <di:waypoint x="450" y="280" />
+        <di:waypoint x="710" y="280" />
+        <di:waypoint x="710" y="135" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fxldbp_di" bpmnElement="Flow_0fxldbp">
+        <di:waypoint x="208" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
