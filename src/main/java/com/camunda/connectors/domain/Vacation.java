@@ -2,15 +2,14 @@ package com.camunda.connectors.domain;
 
 import java.time.LocalDate;
 import java.util.UUID;
-
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName = "vacation-Rule")
+@Document(indexName = "vacationrule")
 @Data
-public class VacationRule {
+public class Vacation {
     @Id
     private UUID id;
 
@@ -31,4 +30,6 @@ public class VacationRule {
 
     @Field(type = FieldType.Text)
     private String delegateTo;
+
+
 }

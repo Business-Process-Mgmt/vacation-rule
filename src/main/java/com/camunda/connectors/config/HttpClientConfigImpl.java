@@ -28,7 +28,7 @@ public class HttpClientConfigImpl implements HttpClientConfigCallback {
             credentialsProvider.setCredentials(AuthScope.ANY, usernamePasswordCredentials);
             httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
 
-            String trustLocationStore = "C:\\Software\\elasticsearch-8.15.0-windows-x86_64\\elasticsearch-8.15.0\\config\\certs\\transport.p12";
+            String trustLocationStore = "C:\\SW\\elasticsearch\\config\\certs\\truststore.p12";
             File trustLocationFile = new File(trustLocationStore);
 
             SSLContextBuilder sslContextBuilder = SSLContexts.custom().loadTrustMaterial(trustLocationFile,
