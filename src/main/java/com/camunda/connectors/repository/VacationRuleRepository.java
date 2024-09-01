@@ -1,10 +1,8 @@
 package com.camunda.connectors.repository;
 
 import com.camunda.connectors.domain.VacationRule;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-@Repository
-public interface  VacationRuleRepository extends JpaRepository<VacationRule, Long> {
+public interface  VacationRuleRepository extends ElasticsearchRepository<VacationRule, Long> {
 
 }

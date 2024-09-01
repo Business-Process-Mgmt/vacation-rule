@@ -3,10 +3,3 @@ server:
 spring:
   application:
     name: camunda-vacation-rule-application
-  datasource:
-    url: jdbc:postgresql://camunda-db.postgres.database.azure.com:5432/postgres
-    username: postgre
-    password: kolkata@1
-    hikari:
-      connectionTimeout: 20000
-      maximumPoolSize: 5
